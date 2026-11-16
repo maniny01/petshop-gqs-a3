@@ -15,9 +15,9 @@ Sistema desktop voltado ao apoio operacional e administrativo de pet shops e cl�
 
 ## 👥 2. Integrantes da Equipe
 
-* 👤 **Diego Manini**
-* 👤 **Yago Siqueira**
-* 👤 **Diogo Marx Lopes**
+* 👤 **Diego Manini** - RA 32424894
+* 👤 **Yago Siqueira** - RA 325144526
+* 👤 **Diogo Marx Lopes** - RA 325132950
 
 ---
 
