@@ -1,64 +1,70 @@
-# petshop-gqs-a3
-# Sistema de Apoio a Pet Shop e Veterinária
+# 🐾 Sistema Pet Shop & Clínica Veterinária
 
-Trabalho prático final da disciplina de Gestão e Qualidade de Software (A3)[span_1](start_span)[span_1](end_span).
-
----
-
-## 1. Tema Escolhido
-
-* **Tema:** PetShop / Veterinária[span_2](start_span)[span_2](end_span)[span_3](start_span)[span_3](end_span)
-* **Descrição do Sistema:** Sistema de apoio à gestão de um pet shop e clínica veterinária, permitindo a gestão completa de clientes (CRUD), gestão do catálogo de serviços oferecidos (ex.: banho, tosa, vacinações) e gestão financeira/vendas associadas aos atendimentos prestados[span_4](start_span)[span_4](end_span)[span_5](start_span)[span_5](end_span).
+> Trabalho Prático Final (A3) da disciplina de **Gestão e Qualidade de Software**.
 
 ---
 
-## 2. Integrantes do Grupo
+## 📌 1. Sobre o Projeto
 
-* Diego Manini[span_6](start_span)[span_6](end_span)
-* Yago Siqueira[span_7](start_span)[span_7](end_span)
-* Diogo Marx Lopes[span_8](start_span)[span_8](end_span)
+Sistema desktop voltado ao apoio operacional e administrativo de pet shops e clínicas veterinárias. A solução centraliza o controle cadastral de clientes e animais, catálogo de procedimentos e o fechamento financeiro de atendimentos prestados.
 
----
-
-## 3. Tecnologias Utilizadas
-
-* **Linguagem:** Java 17[span_9](start_span)[span_9](end_span)
-* **Gestor de Dependências e Build:** Apache Maven
-* **Framework de Testes:** JUnit 5 (JUnit Jupiter)[span_10](start_span)[span_10](end_span)
-* **Controlo de Versões:** Git / GitHub[span_11](start_span)[span_11](end_span)
+* **Tema:** PetShop / Veterinária
+* **Escopo:** Operações completas de CRUD (cadastrar, consultar, alterar e excluir) orientadas a objetos com cobertura de testes unitários.
 
 ---
 
-## 4. Estrutura do Projeto e Classes
+## 👥 2. Integrantes da Equipe
 
-O sistema foi modelado sob o paradigma de programação orientada a objetos com encapsulamento rigoroso e operações de CRUD[span_12](start_span)[span_12](end_span)[span_13](start_span)[span_13](end_span):
-
-1. `Cliente`: Gestão dos dados cadastrais dos tutores[span_14](start_span)[span_14](end_span).
-2. `Pet`: Registo dos animais associados aos clientes tutores.
-3. `Servico`: Catálogo de procedimentos disponíveis (banho, tosa, vacinas, consultas)[span_15](start_span)[span_15](end_span).
-4. `Agendamento`: Controlo de horários, datas e estados de marcação de atendimentos.
-5. `ItemVenda`: Itens individuais e serviços discriminados numa ordem de serviço/venda[span_16](start_span)[span_16](end_span).
-6. `Venda`: Fechamento financeiro, cálculo de totais, descontos e métodos de pagamento[span_17](start_span)[span_17](end_span).
+* 👤 **Diego Manini**
+* 👤 **Yago Siqueira**
+* 👤 **Diogo Marx Lopes**
 
 ---
 
-## 5. Metodologia de Desenvolvimento (TDD e Git)
+## 🛠️ 3. Tecnologias & Ferramentas
 
-O desenvolvimento seguiu rigorosamente o ciclo de **Test-Driven Development (TDD)** e boas práticas de versionamento[span_18](start_span)[span_18](end_span)[span_19](start_span)[span_19](end_span):
-
-* **Ciclo RED → GREEN → REFACTOR:** Cada funcionalidade e método possui o teste implementado previamente, com histórico de commits refletindo o padrão exigido (`RED: ...`, `GREEN: ...`, `REFACTOR: ...`)[span_20](start_span)[span_20](end_span).
-* **Cobertura de Testes:** Ao menos 3 testes unitários com JUnit 5 para cada método (cenário normal, valor limite e cenário de erro/exceção)[span_21](start_span)[span_21](end_span).
-* **Branches e Colaboração:** Cada funcionalidade foi desenvolvida em branch própria (`feature/...`) e integrada à `main` somente com os testes aprovados[span_22](start_span)[span_22](end_span).
+* ☕ **Java 17**
+* 📦 **Apache Maven** (Gerenciamento de dependências e build)
+* 🧪 **JUnit 5 (Jupiter)** (Framework de testes unitários)
+* 🐙 **Git & GitHub** (Versionamento e fluxo de colaboração)
 
 ---
 
-## 6. Como Compilar e Executar os Testes
+## 🏛️ 4. Estrutura do Domínio (Entidades)
+
+O sistema conta com 6 classes principais de domínio com atributos privados e encapsulamento rigoroso:
+
+1. 👤 `Cliente` — Cadastro completo dos tutores (ID, nome, telefone, email).
+2. 🐕 `Pet` — Animais vinculados aos tutores (ID, nome, espécie, porte, idade).
+3. ✂️ `Servico` — Catálogo de itens disponíveis (banho, tosa, vacina, consulta) com valores base.
+4. 📅 `Agendamento` — Marcação e controle de status de horários de atendimento.
+5. 📋 `ItemVenda` — Discriminação individual de cada serviço prestado na ordem de serviço.
+6. 💳 `Venda` — Registro financeiro final, consolidação de totais, descontos e pagamentos.
+
+---
+
+## 🔄 5. Metodologia TDD & Padrão de Git
+
+O desenvolvimento segue a disciplina de **Test-Driven Development (TDD)** e histórico estruturado de branches:
+
+* 🔴 **RED:** Implementação do teste unitário antes do código de produção (teste quebrando).
+* 🟢 **GREEN:** Código mínimo necessário para fazer a asserção passar com sucesso.
+* 🔵 **REFACTOR:** Limpeza e otimização do código sem alterar comportamento e mantendo os testes verdes.
+
+### Critérios de Testes Unitários
+* Mínimo de 3 casos de teste com JUnit 5 para cada método do sistema:
+  * ✅ **Caso Normal:** Fluxo ideal de execução.
+  * ⚠️ **Valor Limite:** Casos extremos de borda e limites de parâmetros.
+  * ❌ **Caso de Erro:** Disparo de exceções esperadas e entradas inválidas.
+
+---
+
+## 🚀 6. Como Compilar e Rodar os Testes
 
 ### Pré-requisitos
-* Java JDK 17 instalado e configurado nas variáveis de ambiente.
-* Apache Maven instalado.
+* **Java JDK 17+**
+* **Apache Maven**
 
-### Compilação do Projeto
-Para descarregar as dependências e compilar o código-fonte:
+### ⚙️ Compilação
 ```bash
-mvn compile
+mvn clean compile
