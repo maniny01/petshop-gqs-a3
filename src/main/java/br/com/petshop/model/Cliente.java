@@ -1,5 +1,7 @@
 package br.com.petshop.model;
 
+import static br.com.petshop.util.Validacao.exigirTexto;
+
 /** Tutor dos animais atendidos no PetShop. */
 public class Cliente implements Identificavel {
     private final int id;
@@ -39,12 +41,5 @@ public class Cliente implements Identificavel {
             throw new IllegalArgumentException("Email inválido");
         }
         this.email = valor;
-    }
-
-    private static String exigirTexto(String campo, String valor) {
-        if (valor == null || valor.isBlank()) {
-            throw new IllegalArgumentException(campo + " é obrigatório");
-        }
-        return valor.trim();
     }
 }
