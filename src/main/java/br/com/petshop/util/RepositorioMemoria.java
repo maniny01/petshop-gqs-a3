@@ -12,9 +12,7 @@ public class RepositorioMemoria<T extends Identificavel> {
     private final Map<Integer, T> registros = new LinkedHashMap<>();
 
     public void salvar(T entidade) {
-        if (entidade == null) {
-            throw new IllegalArgumentException("Entidade não pode ser nula.");
-        }
+        validarEntidadeNaoNula(entidade);
         int id = entidade.getId();
         if (registros.containsKey(id)) {
             throw new IllegalArgumentException("Já existe registro com o ID: " + id);
@@ -27,9 +25,7 @@ public class RepositorioMemoria<T extends Identificavel> {
     }
 
     public void atualizar(T entidade) {
-        if (entidade == null) {
-            throw new IllegalArgumentException("Entidade não pode ser nula.");
-        }
+        validarEntidadeNaoNula(entidade);
         int id = entidade.getId();
         if (!registros.containsKey(id)) {
             throw new IllegalArgumentException("Registro não encontrado para o ID: " + id);
@@ -49,12 +45,15 @@ public class RepositorioMemoria<T extends Identificavel> {
     }
 
     public int proximoId() {
-        int maiorId = 0;
-        for (Integer id : registros.keySet()) {
-            if (id > maiorId) {
-                maiorId = id;
-            }
+        return registros.keySet().stream()
+                .mapToInt(Integer::intValue)
+                .max()
+                .orElse(0) + 1;
+    }
+
+    private void validarEntidadeNaoNula(T entidade) {
+        if (entidade == null) {
+            throw new IllegalArgumentException("Entidade não pode ser nula.");
         }
-        return maiorId + 1;
     }
 }
