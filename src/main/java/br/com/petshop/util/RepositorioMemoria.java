@@ -43,6 +43,9 @@ public class RepositorioMemoria<T extends Identificavel> {
     public List<T> listar() {
         return new ArrayList<>(registros.values());
     }
+    public int contar() {
+        return registros.size();
+    }
 
     public int proximoId() {
         return registros.keySet().stream()
