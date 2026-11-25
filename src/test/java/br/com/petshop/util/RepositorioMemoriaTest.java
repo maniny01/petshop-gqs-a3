@@ -159,4 +159,22 @@ class RepositorioMemoriaTest {
         repo.salvar(new Coisa(3, "b"));
         assertEquals(11, repo.proximoId());
     }
+    // ----- bordas e contar -----
+    @Test
+    void proximoIdAposExcluirMaiorIdMantemBaseCorreta() {
+        repo.salvar(new Coisa(10, "a"));
+        repo.salvar(new Coisa(3, "b"));
+        repo.excluir(10);
+        assertEquals(4, repo.proximoId());
+    }
+
+    @Test
+    void contarRefleteQuantidadeDeRegistros() {
+        assertEquals(0, repo.contar());
+        repo.salvar(new Coisa(1, "a"));
+        repo.salvar(new Coisa(2, "b"));
+        assertEquals(2, repo.contar());
+        repo.excluir(1);
+        assertEquals(1, repo.contar());
+    }
 }
