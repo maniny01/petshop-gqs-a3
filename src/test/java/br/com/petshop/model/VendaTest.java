@@ -94,4 +94,55 @@ class VendaTest {
         assertThrows(IllegalArgumentException.class,
                 () -> venda.setDesconto(-1.0));
     }
+
+    // ----- getTotal (testes adicionais) -----
+    @Test
+    void totalSemDescontoEIgualAoSubtotal() {
+        Venda venda = new Venda();
+        venda.adicionarItem(new ItemVenda(banho, 2));
+
+        assertEquals(venda.getSubtotal(), venda.getTotal(), 0.001);
+    }
+
+    @Test
+    void totalComDescontoCemEZero() {
+        Venda venda = new Venda();
+        venda.adicionarItem(new ItemVenda(banho, 1));
+        venda.setDesconto(100);
+
+        assertEquals(0.0, venda.getTotal(), 0.001);
+    }
+
+    @Test
+    void totalDeVendaVaziaEZero() {
+        assertEquals(0.0, new Venda().getTotal(), 0.001);
+    }
+
+    // ----- getDesconto -----
+    @Test
+    void descontoInicialEZero() {
+        assertEquals(0.0, new Venda().getDesconto(), 0.001);
+    }
+
+    @Test
+    void getDescontoDevolveOValorAplicado() {
+        Venda venda = new Venda();
+        venda.setDesconto(15);
+
+        assertEquals(15.0, venda.getDesconto(), 0.001);
+    }
+
+    @Test
+    void getDescontoAceitaLimiteCem() {
+        Venda venda = new Venda();
+        venda.setDesconto(100);
+
+        assertEquals(100.0, venda.getDesconto(), 0.001);
+    }
+
+    // ----- getItens -----
+    @Test
+    void getItensDeVendaNovaEstaVazia() {
+        assertTrue(new Venda().getItens().isEmpty());
+    }
 }
