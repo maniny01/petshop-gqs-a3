@@ -177,4 +177,22 @@ class RepositorioMemoriaTest {
         repo.excluir(1);
         assertEquals(1, repo.contar());
     }
+    // ----- estaVazio -----
+    @Test
+    void estaVazioDeveRetornarTrueQuandoRepositorioNovo() {
+        assertTrue(repo.estaVazio());
+    }
+
+    @Test
+    void estaVazioDeveRetornarFalseAposSalvarItem() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertFalse(repo.estaVazio());
+    }
+
+    @Test
+    void estaVazioDeveVoltarATrueAposRemoverUnicoItem() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.excluir(1);
+        assertTrue(repo.estaVazio());
+    }
 }
