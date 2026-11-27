@@ -195,4 +195,22 @@ class RepositorioMemoriaTest {
         repo.excluir(1);
         assertTrue(repo.estaVazio());
     }
+    // ----- existePorId -----
+    @Test
+    void existePorIdDeveRetornarTrueQuandoExistir() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertTrue(repo.existePorId(1));
+    }
+
+    @Test
+    void existePorIdDeveRetornarFalseQuandoNaoExistir() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertFalse(repo.existePorId(99));
+        assertFalse(repo.existePorId(-1));
+    }
+
+    @Test
+    void existePorIdDeveRetornarFalseEmRepositorioVazio() {
+        assertFalse(repo.existePorId(1));
+    }
 }
