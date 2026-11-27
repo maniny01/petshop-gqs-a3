@@ -110,4 +110,7 @@ public class RepositorioMemoria<T extends Identificavel> {
     public boolean existePorId(int id) {
         return registros.containsKey(id);
     }
+    public void limpar() {
+        registros.clear();
+    }
 }
