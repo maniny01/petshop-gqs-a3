@@ -1,8 +1,6 @@
 
 package br.com.petshop.model;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import java.time.LocalDateTime;
 
 public class Agendamento implements Identificavel {
@@ -87,97 +85,5 @@ public class Agendamento implements Identificavel {
         }
 
         this.dataHora = novaDataHora;
-    }
-
-
-    @Test
-    void naoDeveConfirmarAgendamentoJaConfirmado() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.confirmar();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::confirmar);
-    }
-
-    @Test
-    void naoDeveConcluirAgendamentoPendente() {
-        Agendamento agendamento = criarAgendamento();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::concluir);
-    }
-
-    @Test
-    void naoDeveCancelarAgendamentoConcluido() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.confirmar();
-        agendamento.concluir();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::cancelar);
-    }
-
-    @Test
-    void naoDeveReagendarAgendamentoCancelado() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.cancelar();
-
-        assertThrows(IllegalStateException.class,
-                () -> agendamento.reagendar(
-                        LocalDateTime.of(2026, 12, 20, 10, 0)));
-    }
-
-    @Test
-    void naoDeveReagendarComDataNula() {
-        Agendamento agendamento = criarAgendamento();
-
-        assertThrows(IllegalArgumentException.class,
-                () -> agendamento.reagendar(null));
-    }
-
-
-    @Test
-    void naoDeveConfirmarAgendamentoJaConfirmado() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.confirmar();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::confirmar);
-    }
-
-    @Test
-    void naoDeveConcluirAgendamentoPendente() {
-        Agendamento agendamento = criarAgendamento();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::concluir);
-    }
-
-    @Test
-    void naoDeveCancelarAgendamentoConcluido() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.confirmar();
-        agendamento.concluir();
-
-        assertThrows(IllegalStateException.class,
-                agendamento::cancelar);
-    }
-
-    @Test
-    void naoDeveReagendarAgendamentoCancelado() {
-        Agendamento agendamento = criarAgendamento();
-        agendamento.cancelar();
-
-        assertThrows(IllegalStateException.class,
-                () -> agendamento.reagendar(
-                        LocalDateTime.of(2026, 12, 20, 10, 0)));
-    }
-
-    @Test
-    void naoDeveReagendarComDataNula() {
-        Agendamento agendamento = criarAgendamento();
-
-        assertThrows(IllegalArgumentException.class,
-                () -> agendamento.reagendar(null));
     }
 }
