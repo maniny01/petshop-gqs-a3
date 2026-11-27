@@ -177,4 +177,65 @@ class RepositorioMemoriaTest {
         repo.excluir(1);
         assertEquals(1, repo.contar());
     }
+    // ----- estaVazio -----
+    @Test
+    void estaVazioDeveRetornarTrueQuandoRepositorioNovo() {
+        assertTrue(repo.estaVazio());
+    }
+
+    @Test
+    void estaVazioDeveRetornarFalseAposSalvarItem() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertFalse(repo.estaVazio());
+    }
+
+    @Test
+    void estaVazioDeveVoltarATrueAposRemoverUnicoItem() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.excluir(1);
+        assertTrue(repo.estaVazio());
+    }
+    // ----- existePorId -----
+    @Test
+    void existePorIdDeveRetornarTrueQuandoExistir() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertTrue(repo.existePorId(1));
+    }
+
+    @Test
+    void existePorIdDeveRetornarFalseQuandoNaoExistir() {
+        repo.salvar(new Coisa(1, "Banho"));
+        assertFalse(repo.existePorId(99));
+        assertFalse(repo.existePorId(-1));
+    }
+
+    @Test
+    void existePorIdDeveRetornarFalseEmRepositorioVazio() {
+        assertFalse(repo.existePorId(1));
+    }
+    // ----- limpar -----
+    @Test
+    void limparDeveEsvaziarRepositorioComItens() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.salvar(new Coisa(2, "Tosa"));
+        repo.limpar();
+        assertTrue(repo.estaVazio());
+        assertEquals(0, repo.contar());
+    }
+
+    @Test
+    void limparEmRepositorioVazioDeveManterVazio() {
+        repo.limpar();
+        assertTrue(repo.estaVazio());
+        assertEquals(0, repo.contar());
+    }
+
+    @Test
+    void limparDevePermitirSalvarNovosItensEmSeguida() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.limpar();
+        repo.salvar(new Coisa(1, "Consulta"));
+        assertEquals(1, repo.contar());
+        assertEquals("Consulta", repo.buscarPorId(1).get().getNome());
+    }
 }

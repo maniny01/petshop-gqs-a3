@@ -104,4 +104,29 @@ public class RepositorioMemoria<T extends Identificavel> {
             throw new IllegalArgumentException("Entidade não pode ser nula.");
         }
     }
+/**
+     * Verifica se o repositório não possui registros armazenados.
+     *
+     * @return {@code true} se estiver vazio, {@code false} caso contrário
+     */
+    public boolean estaVazio() {
+        return registros.isEmpty();
+    }
+
+    /**
+     * Verifica se existe algum registro associado ao ID informado.
+     *
+     * @param id identificador a ser consultado
+     * @return {@code true} se o ID existir no repositório, {@code false} caso contrário
+     */
+    public boolean existePorId(int id) {
+        return registros.containsKey(id);
+    }
+
+    /**
+     * Remove todos os registros armazenados no repositório.
+     */
+    public void limpar() {
+        registros.clear();
+    }
 }
