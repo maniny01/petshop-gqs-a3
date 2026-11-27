@@ -107,4 +107,7 @@ public class RepositorioMemoria<T extends Identificavel> {
     public boolean estaVazio() {
         return registros.isEmpty();
     }
+    public boolean existePorId(int id) {
+        return registros.containsKey(id);
+    }
 }
