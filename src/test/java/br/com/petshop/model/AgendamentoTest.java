@@ -79,4 +79,40 @@ class AgendamentoTest {
 
         assertEquals(novaData, agendamento.getDataHora());
     }
+
+
+    @Test
+void deveImpedirConfirmarAgendamentoJaConfirmado() {
+    Agendamento agendamento = criarAgendamento();
+    agendamento.confirmar();
+
+    assertThrows(IllegalStateException.class,
+            agendamento::confirmar);
+}
+
+@Test
+void deveImpedirConcluirAgendamentoPendente() {
+    Agendamento agendamento = criarAgendamento();
+
+    assertThrows(IllegalStateException.class,
+            agendamento::concluir);
+}
+
+@Test
+void deveImpedirCancelarAgendamentoConcluido() {
+    Agendamento agendamento = criarAgendamento();
+    agendamento.confirmar();
+    agendamento.concluir();
+
+    assertThrows(IllegalStateException.class,
+            agendamento::cancelar);
+}
+
+@Test
+void deveImpedirReagendarComDataNula() {
+    Agendamento agendamento = criarAgendamento();
+
+    assertThrows(IllegalArgumentException.class,
+            () -> agendamento.reagendar(null));
+    }
 }
