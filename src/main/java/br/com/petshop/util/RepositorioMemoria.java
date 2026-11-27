@@ -104,4 +104,7 @@ public class RepositorioMemoria<T extends Identificavel> {
             throw new IllegalArgumentException("Entidade não pode ser nula.");
         }
     }
+    public boolean estaVazio() {
+        return registros.isEmpty();
+    }
 }
