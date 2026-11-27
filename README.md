@@ -32,14 +32,14 @@ Sistema desktop voltado ao apoio operacional e administrativo de pet shops e cl�
 
 ## 🏛️ 4. Estrutura do Domínio (Entidades)
 
-O sistema conta com 6 classes principais de domínio com atributos privados e encapsulamento rigoroso:
+O sistema conta com 6 classes principais de domínio com atributos privados e encapsulamento, além de `Validacao` (regras reutilizáveis) e `RepositorioMemoria` (CRUD genérico em memória):
 
 1. 👤 `Cliente` — Cadastro completo dos tutores (ID, nome, telefone, email).
-2. 🐕 `Pet` — Animais vinculados aos tutores (ID, nome, espécie, porte, idade).
+2. 🐕 `Pet` — Animais atendidos no PetShop (ID, nome, porte, idade).
 3. ✂️ `Servico` — Catálogo de itens disponíveis (banho, tosa, vacina, consulta) com valores base.
 4. 📅 `Agendamento` — Marcação e controle de status de horários de atendimento.
 5. 📋 `ItemVenda` — Discriminação individual de cada serviço prestado na ordem de serviço.
-6. 💳 `Venda` — Registro financeiro final, consolidação de totais, descontos e pagamentos.
+6. 💳 `Venda` — Registro financeiro final: itens, subtotal, desconto percentual e total.
 
 ---
 
@@ -68,3 +68,54 @@ O desenvolvimento segue a disciplina de **Test-Driven Development (TDD)** e hist
 ### ⚙️ Compilação
 ```bash
 mvn clean compile
+```
+
+### 🧪 Rodar os testes
+```bash
+mvn test
+```
+
+### ▶️ Executar o sistema (menu de console)
+```bash
+mvn compile exec:java
+```
+O menu permite cadastrar, listar, alterar e excluir **Clientes, Pets, Serviços e Agendamentos**, além de criar **Vendas** (com itens e desconto).
+
+---
+
+## 🗂️ 7. Estrutura do Projeto
+```
+src/main/java/br/com/petshop/
+├── model/   Cliente, Pet, Servico, Agendamento, ItemVenda, Venda (+ Porte, StatusAgendamento, Identificavel)
+├── util/    Validacao, RepositorioMemoria<T> (CRUD genérico em memória)
+└── app/     Main (menu de console para demonstrar o CRUD)
+src/test/java/br/com/petshop/   testes JUnit 5 de cada classe
+```
+
+### Diagrama de classes
+```mermaid
+classDiagram
+    class Identificavel { <<interface>> +getId() int }
+    class Cliente { -id -nome -telefone -email +setNome() +setTelefone() +setEmail() }
+    class Pet { -id -nome -porte -idade +setNome() +setPorte() +setIdade() }
+    class Servico { -id -nome -valor +setNome() +setValor() }
+    class Agendamento { -id -dataHora -status +confirmar() +concluir() +cancelar() +reagendar() }
+    class ItemVenda { -quantidade +getSubtotal() }
+    class Venda { -desconto +adicionarItem() +getSubtotal() +setDesconto() +getTotal() }
+    class RepositorioMemoria~T~ { +salvar() +buscarPorId() +listar() +atualizar() +excluir() +proximoId() }
+    class Validacao { +exigirTexto() +exigirPositivo() +exigirIntervalo() }
+    Identificavel <|.. Cliente
+    Identificavel <|.. Pet
+    Identificavel <|.. Servico
+    Identificavel <|.. Agendamento
+    Pet "1" --> "*" Agendamento
+    Servico "1" --> "*" Agendamento
+    Venda "1" *-- "*" ItemVenda
+    ItemVenda "*" --> "1" Servico
+    RepositorioMemoria ..> Identificavel
+```
+
+---
+
+## 🔁 8. Fluxo de Git da equipe
+Cada funcionalidade foi desenvolvida em uma branch própria (`feature/...`), com commits `RED:`, `GREEN:` e `REFACTOR:`, e integrada à `main` via merge/pull request com os testes passando. Histórico: `git log --oneline --graph`.
