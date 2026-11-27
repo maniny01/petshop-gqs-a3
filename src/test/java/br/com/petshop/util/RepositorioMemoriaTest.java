@@ -213,4 +213,29 @@ class RepositorioMemoriaTest {
     void existePorIdDeveRetornarFalseEmRepositorioVazio() {
         assertFalse(repo.existePorId(1));
     }
+    // ----- limpar -----
+    @Test
+    void limparDeveEsvaziarRepositorioComItens() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.salvar(new Coisa(2, "Tosa"));
+        repo.limpar();
+        assertTrue(repo.estaVazio());
+        assertEquals(0, repo.contar());
+    }
+
+    @Test
+    void limparEmRepositorioVazioDeveManterVazio() {
+        repo.limpar();
+        assertTrue(repo.estaVazio());
+        assertEquals(0, repo.contar());
+    }
+
+    @Test
+    void limparDevePermitirSalvarNovosItensEmSeguida() {
+        repo.salvar(new Coisa(1, "Banho"));
+        repo.limpar();
+        repo.salvar(new Coisa(1, "Consulta"));
+        assertEquals(1, repo.contar());
+        assertEquals("Consulta", repo.buscarPorId(1).get().getNome());
+    }
 }
